@@ -1,0 +1,6 @@
+<script>
+  const ENV = new URLSearchParams(location.search).get('env') === 'stage' ? 'demo' : 'prod';
+  const script = document.createElement('script');
+  script.src = `https://adobeioruntime.net/api/v1/web/aioe-${ENV}/aio-developers-0.0.1/codelabs?file=head.js`;
+  document.head.appendChild(script);
+</script>

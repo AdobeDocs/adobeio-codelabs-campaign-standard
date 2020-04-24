@@ -1,0 +1,14 @@
+{
+  "title": "CodeLab title",
+  "repository": "https://github.com/AdobeDocs/adobeio-codelabs-template",
+  "navigation": [{
+    "title": "Lesson 1",
+    "url": "/lessons/lesson1"
+  }, {
+    "title": "Lesson 2",
+    "url": "/lessons/lesson2"
+  }, {
+    "title": "Lesson 3",
+    "url": "/lessons/lesson3"
+  }]
+}

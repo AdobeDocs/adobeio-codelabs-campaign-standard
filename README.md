@@ -1,29 +1,26 @@
-# Adobe I/O CodeLabs template
+# Build a Firefly App for Customer Profiles using Adobe Campaign Standard API
 
-## Getting started 
+## Summary
 
-Click on the "Use this template" button to copy the template to your namespace. 
+[Project Firefly](https://github.com/AdobeDocs/project-firefly) is a complete framework that enables enterprise developers to build and deploy custom web applications that extend Adobe Experience Cloud solutions and run on Adobe infrastructure. It leverages modern technologies (JAM stack, serverless computing, Node, and React) and ensures best practices when building applications (event-driven architecture, microservices, continuous integration, and delivery).  
 
-The codelab entry point is the [README](README.md). You can put your codelab content including assets under the [lessons](/lessons) directory. The codelab [manifest.json](manifest.json) holds the navigation information and more. Link your lessons in that file in order to render the navigation.
+[Adobe Campaign Standard (ACS)](https://www.adobe.com/marketing/campaign.html) provides a platform for designing and executing digital marketing campaigns and provides an environment for visual campaign orchestration.  
 
-## Preview codelab locally
+[Campaign Standard APIs](https://docs.adobe.com/content/help/en/campaign-standard/using/working-with-apis/about-campaign-standard-apis/about-campaign-standard-apis.html) are aimed at letting you create integrations for Adobe Campaign Standard and build your own ecosystem by interfacing Adobe Campaign Standard with the panel of technologies that you use.
 
-The template codelab is based on the Project Helix https://www.project-helix.io/. Follow instructions as explained.
+In this lab, you will learn how to build a simple web app listing customer profiles and allowing personalized email promotions through ACS API.
 
-`npm i -g @adobe/helix-cli && hlx up` is enough to get you started. Make sure to have at least `npm@6.14.x` installed and an initial commit. 
+## Prerequisites
 
-## Share codelab URL
+This codelab is for anyone who are getting started with developing Firefly apps. There are a few prerequisites to get you started.
 
-You can visit https://[REPO_NAME]-[REPO_OWNER].project-helix.page to see it running.
+* Project Firefly
+ * Please make sure that your local machine is equipped with [Technical Requirements](https://github.com/AdobeDocs/project-firefly/blob/master/getting_started/technical_requirements.md).
+ * It is useful that you are familiar with Project Firefly tooling. Therefore you are recommended to go though ["Getting Started with Project Firefly"](https://github.com/AdobeDocs/project-firefly/blob/master/getting_started/setup.md) before starting this lab.
 
-Demo: https://adobeio-codelabs-template-adobedocs.project-helix.page/ 
+* Campaign Standard APIs
+ * You should have sufficient access to an ACS instance as well as an organization on [Adobe I/O Console](https://console.adobe.io/) provisioned with ACS API in order to work on this lab.
+ * We assume you have an available integration on I/O Console with enabled ACS API
+ * TODO: self-provisioning might be provided.
 
-Make sure to push your changes before sharing the URL.
-
-## Contribute to Adobe I/O CodeLabs
-
-Once your codelab is ready, submit a PR to add it to the index at https://github.com/AdobeDocs/adobeio-codelabs/blob/gh-pages/actions/index.json  
-
-
-
-  
+[Start the first lesson](/lessons/lesson1.md)

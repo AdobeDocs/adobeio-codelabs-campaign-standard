@@ -67,7 +67,7 @@ Verify that the new action is working by running the app locally with `aio app r
 
 *Note: Visit the codelab [Headless Apps with Project Firefly](https://adobeio-codelabs-barcode-adobedocs.project-helix.page) to learn more about building a headless app for barcode generation.*
 
-Now that you have it set up in Firefly app, next step is to create a marketing workflow in ACS which takes care of receiving external signals from the app and sending promotion emails. To do that, go to *Marketing Activities > Create > Workflow*. Define the properties of your workflow, and finish the creation.  
+Now that you have it set up in Firefly app, next step is to create a marketing workflow in Campaign Standard which takes care of receiving external signals from the app and sending promotion emails. To do that, go to *Marketing Activities > Create > Workflow*. Define the properties of your workflow, and finish the creation.  
 
 Your new workflow should contain 3 components, in correct order:
 1. External signal
@@ -90,13 +90,13 @@ Design the email as you prefer. One required component is an image that loads th
 
 ![acs-editor](assets/acs-editor.png)
 
-Save your ACS Workflow and start it. It should be now ready to execute upon external signal triggering!  
+Save your Campaign Standard Workflow and start it. It should be now ready to execute upon external signal triggering!  
 
-The last step is to add an action to trigger the ACS workflow, and a "Send promo code" button on the app UI. We use `aio app add action` again to add the `send-promo` action.
+The last step is to add an action to trigger the Campaign Standard workflow, and a "Send promo code" button on the app UI. We use `aio app add action` again to add the `send-promo` action.
 
 ![action-promo](assets/action-promo.png)
 
-In order to trigger the workflow, you need to provide a workflow ID to the triggering API. You can find it on the ACS UI. In your `.env` file, add a new variable for it, for example `CAMPAIGN_STANDARD_WORKFLOW_ID=WKFXX`. This environment variable is then interpreted into a default param of the `send-promo` action in the manifest file.
+In order to trigger the workflow, you need to provide a workflow ID to the triggering API. You can find it on the Campaign Standard UI. In your `.env` file, add a new variable for it, for example `CAMPAIGN_STANDARD_WORKFLOW_ID=WKFXX`. This environment variable is then interpreted into a default param of the `send-promo` action in the manifest file.
 
 ```yaml
 send-promo:
@@ -117,7 +117,7 @@ Then you should update the source code at `actions/send-promo/index.js` as follo
 
 ```javascript
 /**
- * This action triggers ACS workflow to send promotion email to a specific email address
+ * This action triggers Campaign Standard workflow to send promotion email to a specific email address
  */
 
 const { Core } = require('@adobe/aio-sdk')

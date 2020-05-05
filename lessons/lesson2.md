@@ -86,7 +86,7 @@ async function main (params) {
 exports.main = main
 ```
 
-What happens here, is that the [action](https://github.com/apache/openwhisk/blob/master/docs/actions-nodejs.md) exposes a `main` function, which accepts a list of params from the client. It checks that required params for using the ACS SDK are present in this list, including the `Authorization` header for authentication against Adobe IMS.  
+What happens here, is that the [action](https://github.com/apache/openwhisk/blob/master/docs/actions-nodejs.md) exposes a `main` function, which accepts a list of params from the client. It checks that required params for using the Campaign Standard SDK are present in this list, including the `Authorization` header for authentication against Adobe IMS.  
 An access token is retrieved to initiate the SDK client instance, which is then used to retrieve the list of customer profiles using the [getAllProfiles()](https://docs.adobe.com/content/help/en/campaign-standard/using/working-with-apis/managing-profiles/retrieving-profiles.html) function. Finally the profiles are returned to the client. This whole execution is wrapped within a try-catch block, so that errors are handled appropriately.
 
 Next, let's see how the web UI communicates with the backend. All web assets are placed in the `web-src` folder.  

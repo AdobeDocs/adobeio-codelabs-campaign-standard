@@ -1,8 +1,8 @@
 ## Lesson 5: Add Personalized Promotion Emails Triggering
 
-*Note: This is an advanced lesson of the codelab. You are recommended to go through it, but feel free to skip and jump to the [Recap](recap.md).*
+*Note: This is an advanced part of the codelab. You are recommended to go through it, but feel free to skip and jump to the [Recap](recap.md).*
 
-Now that your app displays a list of customer profiles, let's try adding some user interaction to it. Imagine as a marketer looking at different customer profiles with more extensive data (past orders, date of birth, gender), you may want to send promotional discount code to some specific customers to motivate them to buy your products. Therefore, we will add a "Send promo code" button.
+Now that your app displays a list of customer profiles, let's try adding some user interaction to it. Imagine as a marketer looking at different customer profiles with more extensive data (past orders, date of birth, gender), you may want to send promotional discount codes to some specific customers to motivate them to buy your products. Therefore, we will add a "Send promo code" button.
 
 First of all, you need a new action for generating promo code. Here we use the [uuid](https://www.npmjs.com/package/uuid) npm package to generate it, and [bwip-js](https://www.npmjs.com/package/bwip-js) to render a visual barcode. Simply add them as a dependency in package.json, and run `npm install`. To add the new action, run the following `aio` command, and specify the inputs according to the screenshot below.
 
@@ -65,39 +65,167 @@ Verify that the new action is working by running the app locally with `aio app r
 
 ![generate-code](assets/generate-code.png)
 
-Now that you have it set up in Firefly app, next step is to create a marketing workflow in ACS which takes care of receiving triggers from the app and sending promotion emails. To do that, go to *Marketing Activities > Create > Workflow*. Define the properties of your workflow, and finish the creation.
+*Note: Visit the codelab [Headless Apps with Project Firefly](https://adobeio-codelabs-barcode-adobedocs.project-helix.page) to learn more about building a headless app for barcode generation.*
 
-Send email:
-Select type: Recurring email
-Send via email
-Use the Email Designer
-We select "Astro - Coupon" template
+Now that you have it set up in Firefly app, next step is to create a marketing workflow in ACS which takes care of receiving external signals from the app and sending promotion emails. To do that, go to *Marketing Activities > Create > Workflow*. Define the properties of your workflow, and finish the creation.  
+
+Your new workflow should contain 3 components, in correct order:
+1. External signal
+2. Query user by email
+3. Email delivery
+
+![acs-workflow](assets/acs-workflow.png)
+
+In the "External signal" component, make sure that it accepts `email` as an input parameter.
+
+![external-signal](assets/external-signal.png)
+
+In the "Query" component, make sure that it uses the `email` param to query user.
+
+![acs-query](assets/acs-query.png)
+
+In the "Email delivery" component, go to its editor to design the email. In this lab we will use the "Email Designer" mode, and leverage the available "Astro - Coupon" template.  
 
 Design the email as you prefer. One required component is an image that loads the barcode from the `generate-code` action.
 
 ![acs-editor](assets/acs-editor.png)
 
-Save your ACS Workflow. It should be now ready to execute!  
+Save your ACS Workflow and start it. It should be now ready to execute upon external signal triggering!  
 
 The last step is to add an action to trigger the ACS workflow, and a "Send promo code" button on the app UI. We use `aio app add action` again to add the `send-promo` action.
 
 ![action-promo](assets/action-promo.png)
 
-Open `App.js` and add the following component `<Button>` and method `sendPromo()`.
+In order to trigger the workflow, you need to provide a workflow ID to the triggering API. You can find it on the ACS UI. In your `.env` file, add a new variable for it, for example `CAMPAIGN_STANDARD_WORKFLOW_ID=WKFXX`. This environment variable is then interpreted into a default param of the `send-promo` action in the manifest file.
 
-```javascript
-<Button>
+```yaml
+send-promo:
+  function: actions/send-promo/index.js
+  web: 'yes'
+  runtime: 'nodejs:10'
+  inputs:
+    LOG_LEVEL: debug
+    tenant: $CAMPAIGN_STANDARD_TENANT
+    apiKey: $CAMPAIGN_STANDARD_API_KEY
+    workflowId: $CAMPAIGN_STANDARD_WORKFLOW_ID
+  annotations:
+    require-adobe-auth: true
+    final: true
 ```
 
+Then you should update the source code at `actions/send-promo/index.js` as following:
+
 ```javascript
-sendPromo()
+/**
+ * This action triggers ACS workflow to send promotion email to a specific email address
+ */
+
+const { Core } = require('@adobe/aio-sdk')
+const { CampaignStandard } = require('@adobe/aio-sdk')
+const { errorResponse, getBearerToken, stringParameters, checkMissingRequestInputs } = require('../utils')
+
+// main function that will be executed by Adobe I/O Runtime
+async function main (params) {
+  // create a Logger
+  const logger = Core.Logger('main', { level: params.LOG_LEVEL || 'info' })
+
+  try {
+    // 'info' is the default level if not set
+    logger.info('Calling the main action')
+
+    // log parameters, only if params.LOG_LEVEL === 'debug'
+    logger.debug(stringParameters(params))
+
+    // check for missing request input parameters and headers
+    const requiredParams = ['apiKey', 'tenant', 'workflowId', 'email']
+    const errorMessage = checkMissingRequestInputs(params, requiredParams, ['Authorization'])
+    if (errorMessage) {
+      // return and log client errors
+      return errorResponse(400, errorMessage, logger)
+    }
+
+    // extract the user Bearer token from the input request parameters
+    const token = getBearerToken(params)
+
+    // initialize the sdk
+    const campaignClient = await CampaignStandard.init(params.tenant, params.apiKey, token)
+
+    // get workflow from Campaign Standard
+    const workflow = await campaignClient.getWorkflow(params.workflowId)
+    const wkfHref = workflow.body.activities.activity.signal1.trigger.href
+
+    // trigger the signal activity API
+    const triggerResult = await campaignClient.triggerSignalActivity(wkfHref, { source: 'API', parameters: { email: params.email } })
+    
+    // log the trigger result
+    logger.info(triggerResult)
+
+    const response = {
+      statusCode: 200,
+      body: { success: 'ok' }
+    }
+
+    // log the response status code
+    logger.info(`${response.statusCode}: successful request`)
+    return response
+  } catch (error) {
+    // log any server errors
+    logger.error(error)
+    // return with 500
+    return errorResponse(500, 'server error', logger)
+  }
+}
+
+exports.main = main
+```
+
+To update the UI, open `App.js` and add method `sendPromo()` as following. Also, don't forget to bind this method inside the constructor: `this.sendPromo = this.sendPromo.bind(this)`.
+
+```javascript
+async sendPromo (email) {
+  try {
+    if (window.confirm(`Send promo code to ${email}?`)) {
+      const headers = {}
+
+      // set the authorization header and org from the ims props object
+      if (this.props.ims.token && !headers.authorization) {
+        headers.authorization = 'Bearer ' + this.props.ims.token
+      }
+      if (this.props.ims.org && !headers['x-org-id']) {
+        headers['x-org-id'] = this.props.ims.org
+      }
+      const actionResponse = await actionWebInvoke('send-promo', headers, { email })
+      console.log(`Response from send-promo:`, actionResponse)
+    }
+  } catch (e) {
+    // log and store any error message
+    console.error(e)
+  }
+}
+```
+
+Finally let's update the renderred profiles grid to include the send promo button.
+
+```javascript
+<Grid>
+  {profiles.map((profile, i) => {
+    return <Flex UNSAFE_className='profile'>
+      <Button UNSAFE_className='actions-invoke-button'
+        variant='primary'
+        onPress={() => this.sendPromo(profile['email'])}>
+        Send promo code
+      </Button>
+      Name: { profile['firstName'] } { profile['lastName'] } - Email: { profile['email'] } - Date of birth: { profile['birthDate'] }
+    </Flex>
+  })}
+</Grid>
 ```
 
 After that, do `aio app run` again so that your app is running locally.
 
-![ui-send](assets/ui-send.png)
+![ui-profiles-button](assets/ui-profiles-button.png)
 
-There will be a prompt confirming your command. Check your email inbox that you have received a promo email.
+Try clicking to send promo to a profile which has your own email address. There will be a prompt confirming your command. Check your email inbox that you have received a promo email.
 
 ![email-promo](assets/email-promo.png)
 

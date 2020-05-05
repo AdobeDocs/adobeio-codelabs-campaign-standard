@@ -47,11 +47,11 @@ async componentWillMount () {
 }
 ```
 
-Finally, delete the `async invokeAction ()` method as we don't need it anymore.
+Finally, delete the `invokeAction ()` and `setJSONInput ()` methods as we don't need them anymore.
 
 Next, we will replace the action invoke form and list of docs in the default template, by a list of customer profiles returned by the `get-profiles` action. It should display first name, last name, and email of the customers.  
 
-*Note: For simplicity of the lab, we only display the first page of the result. In a real environment, where there are hundreds of profiles, results are returned in batches, so we may need to handle pagination of data accordingly.*
+*Note: For simplicity of the lab, we only display the first page of the result. In a real environment, where there are hundreds of profiles, results are returned in batches, so you will need to handle pagination of data accordingly.*
 
 We will use `<Flex>` and `<Grid>` to layout spectrum components on the page. Both are supported in React Spectrum.
 
@@ -59,7 +59,7 @@ We will use `<Flex>` and `<Grid>` to layout spectrum components on the page. Bot
 import { Flex, Grid } from '@react-spectrum/layout'
 ```
 
-The `render()` method should look like following:
+The `render()` method should look like following. You can also apply some CSS styling in the `App.css` file to make it look nice.
 
 ```javascript
 render () {
@@ -82,7 +82,7 @@ render () {
           { !!profiles &&
             <Grid>
               {profiles.map((profile, i) => {
-                return <Flex>Name: { profile.firstName } { profile.lastName } - Email: { profile.email }</Flex>
+                return <Flex UNSAFE_className='profile'>Name: { profile['firstName'] } { profile['lastName'] } - Email: { profile['email'] } - Date of birth: { profile['birthDate'] }</Flex>
               })}
 
             </Grid>

@@ -1,0 +1,13 @@
+## Well done
+
+Congratulations, you've reached the end.
+
+In this codelab, you have learned:
+* How to **bootstrap** your a new Firefly app using Adobe Campaign Standard template
+* What is **inside a Firefly app**
+* How to **run** the app locally, and **deploy** it onto the Firefly platform
+* How to leverage **IMS user profile** from Adobe Experience Cloud Shell to call ACS APIs
+* How to use **React Spectrum** to display a simple list of customer profiles on the **app UI**
+* How to use the "external event trigger" offered by ACS SDK trigger a **custom workflow** in Campaign Stanard, powered by an Adobe I/O Runtime action
+
+The use case presented in this codelab is particularly useful for extensions of Adobe Campaign Standard, or integrating Campaign Standard with external systems such as Point of Sale (POS), CRM (Microsoft Dynamics, Salesforce), etc.

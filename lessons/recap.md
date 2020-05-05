@@ -8,6 +8,6 @@ In this codelab, you have learned:
 * How to **run** the app locally, and **deploy** it onto the Firefly platform
 * How to leverage **IMS user profile** from Adobe Experience Cloud Shell to call ACS APIs
 * How to use **React Spectrum** to display a simple list of customer profiles on the **app UI**
-* How to use the external trigger API to start a **custom workflow** in Campaign Standard, powered by an Adobe I/O Runtime action
+* How to use the external signal API to start a **custom workflow** in Campaign Standard, powered by an Adobe I/O Runtime action
 
 The use case presented in this codelab is particularly useful for extensions of Adobe Campaign Standard, or integrating Campaign Standard with external systems such as Point of Sale (POS), CRM (Microsoft Dynamics, Salesforce), etc.

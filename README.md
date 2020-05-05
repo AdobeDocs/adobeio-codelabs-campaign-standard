@@ -6,6 +6,8 @@
 
 [Campaign Standard APIs](https://docs.adobe.com/content/help/en/campaign-standard/using/working-with-apis/about-campaign-standard-apis/about-campaign-standard-apis.html) are aimed at letting you create integrations for Adobe Campaign Standard and build your own ecosystem by interfacing Adobe Campaign Standard with the panel of technologies that you use.
 
-In this lab, you will learn how to build a simple web app listing customer profiles and allowing personalized email promotions through ACS API.
+In this lab, you will learn how to build a simple web app listing customer profiles and allowing personalized email promotions through ACS API.  
+
+For your convenience, we provide a complete solution of this codelab at [AdobeDocs/adobeio-awesomeapps-customers-dashboard](https://github.com/AdobeDocs/adobeio-awesomeapps-customers-dashboard).  
 
 Please check out the [requirements](/lessons/requirements.md) before starting the first lesson.

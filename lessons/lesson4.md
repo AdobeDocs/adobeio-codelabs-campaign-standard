@@ -1,4 +1,4 @@
-## Lesson 4: Add a Simple UI for Customer Profiles
+## Lesson 4: List All Customer Profiles on the UI
 
 We're going to use React Spectrum to enhance the UI of this app. To learn more about React Spectrum, you're recommended to go through the [Spectrum Introduction Codelab](https://adobeio-codelabs-spectrum-intro-adobedocs.project-helix.page).  
 

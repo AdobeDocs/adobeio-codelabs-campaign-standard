@@ -1,4 +1,4 @@
-## Lesson 1: Create a new Firefly app from ACS template
+## Lesson 1: Create a New Firefly App from ACS Template
 
 To initialize a Firefly app, let's use init command from the CLI.
 

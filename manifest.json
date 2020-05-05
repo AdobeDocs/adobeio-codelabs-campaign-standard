@@ -1,14 +1,26 @@
 {
-  "title": "CodeLab title",
-  "repository": "https://github.com/AdobeDocs/adobeio-codelabs-template",
+  "title": "Build a Firefly App for Customer Profiles using Adobe Campaign Standard API",
+  "repository": "https://github.com/AdobeDocs/adobeio-codelabs-campaign-standard",
   "navigation": [{
-    "title": "Lesson 1",
+    "title": "Requirements",
+    "url": "/lessons/requirements"
+  }, {
+    "title": "Lesson 1: Create a New Firefly App from ACS Template",
     "url": "/lessons/lesson1"
   }, {
-    "title": "Lesson 2",
+    "title": "Lesson 2: Explore the Firefly App",
     "url": "/lessons/lesson2"
   }, {
-    "title": "Lesson 3",
+    "title": "Lesson 3: Run the Firefly App Locally",
     "url": "/lessons/lesson3"
+  }, {
+    "title": "Lesson 4: List All Customer Profiles on the UI",
+    "url": "/lessons/lesson4"
+  }, {
+    "title": "Lesson 5: Add Personalized Promotion Emails Triggering",
+    "url": "/lessons/lesson5"
+  }, {
+    "title": "Recap",
+    "url": "/lessons/recap"
   }]
 }

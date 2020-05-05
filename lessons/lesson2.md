@@ -1,4 +1,4 @@
-## Lesson 2: Explore the Firefly app
+## Lesson 2: Explore the Firefly App
 
 Within the newly created app, you have seen the `.env` file which contains your credentials for running the app. Let's explore further.
 
@@ -30,12 +30,8 @@ Currently your app only has one action `get-profiles`.
 Now let's have a deeper look at the action's source code.
 
 ```javascript
-/*
-* <license header>
-*/
-
 /**
- * This is a sample action showcasing how to access the Adobe Campaign Standard API
+ * This action gets a list of customer profiles the Adobe Campaign Standard API
  */
 
 const { Core } = require('@adobe/aio-sdk')

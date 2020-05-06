@@ -147,4 +147,4 @@ By default, it contains a form that lists all available backend actions, allows 
   }
 </Flex>
 ```
-Now that you've took a glimpse of the source code, [let's try running it!](lesson3.md)
+[Next](lesson3.md)

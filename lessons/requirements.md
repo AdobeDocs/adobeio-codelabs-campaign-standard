@@ -11,4 +11,4 @@ This codelab is for anyone who are getting started with developing Firefly apps.
   * We assume you have an available integration on I/O Console with enabled Campaign Standard API service
   * TODO: self-provisioning might be provided.
 
-[Start the first lesson](/lessons/lesson1.md)
+Next: [Start the first lesson](/lessons/lesson1.md)

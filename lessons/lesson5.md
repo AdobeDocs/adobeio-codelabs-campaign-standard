@@ -4,7 +4,7 @@
 
 Now that your app displays a list of customer profiles, let's try adding some user interaction to it. Imagine as a marketer looking at different customer profiles with more extensive data (past orders, date of birth, gender), you may want to send promotional discount codes to some specific customers to motivate them to buy your products. Therefore, we will add a "Send promo code" button.
 
-First of all, you need a new action for generating promo code. Here we use the [uuid](https://www.npmjs.com/package/uuid) npm package to generate it, and [bwip-js](https://www.npmjs.com/package/bwip-js) to render a visual barcode. Simply add them as a dependency in package.json, and run `npm install`. To add the new action, run the following `aio` command, and specify the inputs according to the screenshot below.
+First of all, you need a new action for generating promo code. Here we use the [uuid](https://www.npmjs.com/package/uuid) npm package to generate it, and [bwip-js](https://www.npmjs.com/package/bwip-js) to render a visual barcode. Simply add them as a dependency in `package.json`, and run `npm install`. To add the new action, run the following `aio` command, and specify the inputs according to the screenshot below.
 
 ```bash
 aio app add action
@@ -184,19 +184,17 @@ To update the UI, open `App.js` and add method `sendPromo()` as following. Also,
 ```javascript
 async sendPromo (email) {
   try {
-    if (window.confirm(`Send promo code to ${email}?`)) {
-      const headers = {}
+    const headers = {}
 
-      // set the authorization header and org from the ims props object
-      if (this.props.ims.token && !headers.authorization) {
-        headers.authorization = 'Bearer ' + this.props.ims.token
-      }
-      if (this.props.ims.org && !headers['x-org-id']) {
-        headers['x-org-id'] = this.props.ims.org
-      }
-      const actionResponse = await actionWebInvoke('send-promo', headers, { email })
-      console.log(`Response from send-promo:`, actionResponse)
+    // set the authorization header and org from the ims props object
+    if (this.props.ims.token && !headers.authorization) {
+      headers.authorization = 'Bearer ' + this.props.ims.token
     }
+    if (this.props.ims.org && !headers['x-org-id']) {
+      headers['x-org-id'] = this.props.ims.org
+    }
+    const actionResponse = await actionWebInvoke('send-promo', headers, { email })
+    console.log(`Response from send-promo:`, actionResponse)
   } catch (e) {
     // log and store any error message
     console.error(e)
@@ -204,31 +202,45 @@ async sendPromo (email) {
 }
 ```
 
-Finally let's update the renderred profiles grid to include the send promo button.
+Finally let's update the renderred profiles grid to include the send promo button. As we're using new React Spectrum components for the confirm dialog, make sure that they are specified as dependencies in the `package.json` file and imported properly in `App.js`.
 
 ```javascript
+// importing confirm dialog components
+import { ActionButton } from '@react-spectrum/button'
+import { AlertDialog, DialogTrigger } from '@react-spectrum/dialog'
+```
+
+```javascript
+// in render(), update the Grid component
 <Grid>
   {profiles.map((profile, i) => {
     return <Flex UNSAFE_className='profile'>
-      <Button UNSAFE_className='actions-invoke-button'
-        variant='primary'
-        onPress={() => this.sendPromo(profile['email'])}>
-        Send promo code
-      </Button>
+      <DialogTrigger>
+        <ActionButton
+          UNSAFE_className='actions-invoke-button'>
+          Send promo code
+        </ActionButton>
+        <AlertDialog
+          variant='confirmation'
+          title='Send promo code'
+          primaryActionLabel='Confirm'
+          cancelLabel='Cancel'
+          onPrimaryAction={ () => this.sendPromo(profile['email']) }>
+          Do you want to send promo to { profile['email'] }?
+        </AlertDialog>
+      </DialogTrigger>
       Name: { profile['firstName'] } { profile['lastName'] } - Email: { profile['email'] } - Date of birth: { profile['birthDate'] }
     </Flex>
   })}
 </Grid>
 ```
 
-After that, do `aio app run` again so that your app is running locally.
+After that, execute `aio app run` again so that your app is running locally.
 
 ![ui-profiles-button](assets/ui-profiles-button.png)
 
 Try clicking to send promo to a profile which has your own email address. There will be a prompt confirming your command. Check your email inbox that you have received a promo email.
 
 ![email-promo](assets/email-promo.png)
-
-Congrats! Now you have your first Firefly app integrated with Adobe Campaign Standard working.
 
 [Next](welldone.md)

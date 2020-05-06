@@ -1,6 +1,6 @@
 ## Lesson 4: List All Customer Profiles on the UI
 
-We're going to use React Spectrum to enhance the UI of this app. To learn more about React Spectrum, you're recommended to go through the [Spectrum Introduction Codelab](https://adobeio-codelabs-spectrum-intro-adobedocs.project-helix.page).  
+We're going to use [React Spectrum](https://react-spectrum.adobe.com/react-spectrum/index.html) to enhance the UI of this app. To learn more about React Spectrum, you're recommended to go through the [Spectrum Introduction Codelab](https://adobeio-codelabs-spectrum-intro-adobedocs.project-helix.page).  
 
 Open `App.js`. In the default example, customer profiles are only loaded to the frontend once you click the "Invoke" button. Now we want the profiles automatically loaded when the page is ready, without any human interaction. We will need a new `profiles` param in the component's state, and the `componentWillMount` method to initiate loading profiles.  
 

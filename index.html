@@ -8,7 +8,7 @@
   <script>
     const ENV = new URLSearchParams(location.search).get('env') === 'stage' ? 'demo' : 'prod';
     const script = document.createElement('script');
-    script.src = `https://adobeioruntime.net/api/v1/web/aioe-${ENV}/aio-developers-0.0.1/codelabs?file=template.js`;
+    script.src = `https://adobeioruntime.net/api/v1/web/aioe-${ENV}/aio-codelabs-0.0.1/codelabs?file=template.js`;
     document.head.appendChild(script);
   </script>
 </body>

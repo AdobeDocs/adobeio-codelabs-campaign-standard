@@ -1,6 +1,6 @@
 ## Lesson 5: Add Personalized Promotion Emails Triggering
 
-*Note: This is an advanced part of the codelab. You are recommended to go through it, but feel free to skip and jump to the [Recap](recap.md).*
+*Note: This is an advanced part of the codelab. You are recommended to go through it, but feel free to skip and jump to the [Recap](welldone.md).*
 
 Now that your app displays a list of customer profiles, let's try adding some user interaction to it. Imagine as a marketer looking at different customer profiles with more extensive data (past orders, date of birth, gender), you may want to send promotional discount codes to some specific customers to motivate them to buy your products. Therefore, we will add a "Send promo code" button.
 

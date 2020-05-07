@@ -1,4 +1,4 @@
-# Build a Firefly App for Customer Profiles using Adobe Campaign Standard API
+# Build a Customer Dashboard with Project Firefly and Adobe Campaign Standard API
 
 [Project Firefly](https://github.com/AdobeDocs/project-firefly) is a complete framework that enables enterprise developers to build and deploy custom web applications that extend Adobe Experience Cloud solutions and run on Adobe infrastructure. It leverages modern technologies (JAM stack, serverless computing, Node, and React) and ensures best practices when building applications (event-driven architecture, microservices, continuous integration, and delivery).  
 

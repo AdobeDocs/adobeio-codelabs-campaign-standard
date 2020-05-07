@@ -1,26 +1,37 @@
 {
   "title": "Build a Customer Dashboard with Project Firefly and Adobe Campaign Standard API",
   "repository": "https://github.com/AdobeDocs/adobeio-codelabs-campaign-standard",
+  "author": {
+    "name": "Duy Nguyen",
+    "email": "adobeio-dev@adobe.com"
+  },
   "navigation": [{
     "title": "Requirements",
-    "url": "/lessons/requirements"
+    "url": "/lessons/requirements",
+    "duration": 5
   }, {
     "title": "Lesson 1: Create a New Firefly App from Campaign Standard Template",
-    "url": "/lessons/lesson1"
+    "url": "/lessons/lesson1",
+    "duration": 7
   }, {
     "title": "Lesson 2: Explore the Firefly App",
-    "url": "/lessons/lesson2"
+    "url": "/lessons/lesson2",
+    "duration": 9
   }, {
     "title": "Lesson 3: Run the Firefly App Locally",
-    "url": "/lessons/lesson3"
+    "url": "/lessons/lesson3",
+    "duration": 5
   }, {
     "title": "Lesson 4: List All Customer Profiles on the UI",
-    "url": "/lessons/lesson4"
+    "url": "/lessons/lesson4",
+    "duration": 11
   }, {
     "title": "Lesson 5: Add Personalized Promotion Emails Triggering",
-    "url": "/lessons/lesson5"
+    "url": "/lessons/lesson5",
+    "duration": 18
   }, {
     "title": "Well Done",
-    "url": "/lessons/welldone"
+    "url": "/lessons/welldone",
+    "duration": 2
   }]
 }

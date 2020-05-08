@@ -6,6 +6,10 @@
     "email": "adobeio-dev@adobe.com"
   },
   "navigation": [{
+    "title": "Introduction",
+    "url": "/README",
+    "duration": 2
+  }, {
     "title": "Requirements",
     "url": "/lessons/requirements",
     "duration": 5

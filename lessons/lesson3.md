@@ -22,7 +22,7 @@ You should be able to see the UI of the app. It contains a form that allows you 
 
 ![localhost-ui](assets/localhost-ui.png)
 
-Let's try invoking the `get-profiles` action. Select it from the dropdown list, and press the "Invoke` button. Because there is no user token embedded in the request header, you will see a `401 Unauthorized` error in the browser console.
+Let's try invoking the `get-profiles` action. Select it from the dropdown list, and press the `Invoke` button. Because there is no user token embedded in the request header, you will see a `401 Unauthorized` error in the browser console.
 
 ![error-401](assets/error-401.png)
 

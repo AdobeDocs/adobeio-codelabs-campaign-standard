@@ -12,7 +12,7 @@
   }, {
     "title": "Requirements",
     "url": "/lessons/requirements",
-    "duration": 5
+    "duration": 3
   }, {
     "title": "Lesson 1: Create a New Firefly App from Campaign Standard Template",
     "url": "/lessons/lesson1",
@@ -24,7 +24,7 @@
   }, {
     "title": "Lesson 3: Run the Firefly App Locally",
     "url": "/lessons/lesson3",
-    "duration": 5
+    "duration": 6
   }, {
     "title": "Lesson 4: List All Customer Profiles on the UI",
     "url": "/lessons/lesson4",

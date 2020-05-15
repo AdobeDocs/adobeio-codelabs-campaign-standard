@@ -4,7 +4,7 @@ This codelab is for anyone who are getting started with developing Firefly apps.
 
 * Project Firefly
   * [How to Get Access to Project Firefly](https://github.com/AdobeDocs/project-firefly/blob/master/overview/getting_access.md)
-  * [Setting up Your Environment](https://github.com/AdobeDocs/project-firefly/blob/master/getting_started/setup.md). Remark: [Visual Studio Code (VSCode)](https://code.visualstudio.com/download) and [VSCode Debugger for Chrome](https://github.com/Microsoft/vscode-chrome-debug) are required for this lab.
+  * [Setting up Your Environment](https://github.com/AdobeDocs/project-firefly/blob/master/getting_started/setup.md)
   * [Creating your First Firefly App](https://github.com/AdobeDocs/project-firefly/blob/master/getting_started/first_app.md)
 
 * Campaign Standard APIs

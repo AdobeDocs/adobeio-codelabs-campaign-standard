@@ -6,15 +6,15 @@ To initialize a Firefly app, let's use init command from the CLI.
 aio app init customers-dashboard
 ```
 
-You're presented with a few options what you want your app to include (serverless actions, web UI assets, CI/CD pipeline). In this lab, we keep all of them.
+You should be selecting the org, project and workspace for your app, and then presented with a few options what you want your app to include (serverless actions, web UI assets, CI/CD pipeline, events). In this lab, we keep all except events.
 
-The second question asks you to select the sample actions to be created as part of the initial app. As customer profiles are pulled from Campaign Standard, we are going to select `Adobe Campaign Standard` for this question (by pressing `<Space>` to select / de-select, and `<Enter>` to confirm the choice).
+The next question asks you to select the sample actions to be created as part of the initial app. As customer profiles are pulled from Campaign Standard, we are going to select `Adobe Campaign Standard` for this question (by pressing `<Space>` to select / de-select, and `<Enter>` to confirm the choice).
 
 Then you will be asked to specify the names of the sample action. Let's name it `get-profiles`.
 
 ![app-init](assets/app-init.png)
 
-What happens next, is that from the command line a developer project is created including the Adobe I/O Runtime actions, configuration files, tests etc. You could explore your project in VS Code, either by opening VSCode -> Open... -> select app folder, or typing the following command.
+What happens next, is that from the command line a NodeJS project is created including the Adobe I/O Runtime actions, configuration files, tests etc. You could explore your project in VS Code, either by opening VSCode -> Open... -> select app folder, or typing the following command.
 
 ```bash
 code customers-dashboard

@@ -106,7 +106,7 @@ send-promo:
   inputs:
     LOG_LEVEL: debug
     tenant: $CAMPAIGN_STANDARD_TENANT
-    apiKey: $CAMPAIGN_STANDARD_API_KEY
+    apiKey: $SERVICE_API_KEY
     workflowId: $CAMPAIGN_STANDARD_WORKFLOW_ID
   annotations:
     require-adobe-auth: true
@@ -190,8 +190,8 @@ async sendPromo (email) {
     if (this.props.ims.token && !headers.authorization) {
       headers.authorization = 'Bearer ' + this.props.ims.token
     }
-    if (this.props.ims.org && !headers['x-org-id']) {
-      headers['x-org-id'] = this.props.ims.org
+    if (this.props.ims.org && !headers['x-gw-ims-org-id']) {
+      headers['x-gw-ims-org-id'] = this.props.ims.org
     }
     const actionResponse = await actionWebInvoke('send-promo', headers, { email })
     console.log(`Response from send-promo:`, actionResponse)

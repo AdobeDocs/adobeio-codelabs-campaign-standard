@@ -68,7 +68,7 @@ render () {
   return (
     // ErrorBoundary wraps child components to handle eventual rendering errors
     <ErrorBoundary onError={ this.onError } FallbackComponent={ this.fallbackComponent } >
-    <Provider UNSAFE_className='provider' theme={ theme }>
+    <Provider UNSAFE_className='provider' theme={ defaultTheme }>
       <Flex UNSAFE_className='main'>
         <Heading UNSAFE_className='main-title'>Welcome to customers-dashboard!</Heading>
 

@@ -4,7 +4,7 @@ The app UI is powered by [React Spectrum](https://react-spectrum.adobe.com/react
 
 In the [previous lesson](lesson3.md), customer profiles are only loaded to the frontend once you click the "Invoke" button. Now we want the profiles automatically loaded on the Home page when the page is ready, without any human interaction. 
 
-We will useadd the `componentWillMount` method to initiate loading profiles, and store the loaded data in `profiles` param of the component's state. We use `<Flex>` and `<Grid>` from React Spectrum to layout spectrum components on the page. Each entry of the customer profiles returned by the `get-profiles` action is displayed with first name, last name, and email of the customers. You can also apply some CSS styling in the `index.css` file to make it look nice. 
+We will use the `componentWillMount` method to initiate loading profiles, and store the loaded data in `profiles` param of the component's state. We use `<Flex>` and `<Grid>` from React Spectrum to layout spectrum components on the page. Each entry of the customer profiles returned by the `get-profiles` action is displayed with first name, last name, and email of the customers. You can also apply some CSS styling in the `index.css` file to make it look nice. 
 
 Below is the complete code of `Home.js`.
 

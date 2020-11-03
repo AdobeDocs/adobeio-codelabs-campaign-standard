@@ -22,12 +22,11 @@ code customers-dashboard
 
 ![app-explore](assets/app-explore.png)
 
-To complete the app configuration, please set your I/O Runtime credentials in the `.env` file, namely `AIO_RUNTIME_NAMESPACE` and `AIO_RUNTIME_AUTH`. For Campaign Standard integration, you also need to set the two required variables for `CAMPAIGN_STANDARD_API_KEY` and `CAMPAIGN_STANDARD_TENANT`.  
-`CAMPAIGN_STANDARD_API_KEY` can be retrieved from I/O Console portal.
+Upon app initialization, some of the mandatory environment variables are automatically defined in the `.env` file, namely `AIO_runtime_namespace`, `AIO_runtime_auth`, and `SERVICE_API_KEY`. If they are not set, you can download the Runtime credentials and obtain the API key from I/O Console.  
 
 ![acs-api-key](assets/acs-api-key.png)
 
-`CAMPAIGN_STANDARD_TENANT` is the subdomain of your Campaign Standard instance.
+Finally, for Campaign Standard integration, you also need to set the required variable for `CAMPAIGN_STANDARD_TENANT`. It is usually the subdomain of your Campaign Standard instance. Otherwise, please consult with your Campaign TechOps team for the correct value.
 
 ![acs-tenant](assets/acs-tenant.png)
 

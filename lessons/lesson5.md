@@ -61,11 +61,11 @@ async function main (params) {
 exports.main = main
 ```
 
-Verify that the new action is working by running the app locally with `aio app run`, and check the response of https://`<your-namespace>`.adobeioruntime.net/api/v1/web/customers-dashboard-0.0.1/generate-code on the browser. You can find your own URL from the terminal output.
+Verify that the new action is working by running the app locally with `aio app run`, and check the response of `https://<your-namespace>.adobeioruntime.net/api/v1/web/customers-dashboard-0.0.1/generate-code` on the browser. You can find your own URL from the terminal output.
 
 ![generate-code](assets/generate-code.png)
 
-*Note: Visit the codelab [Headless Apps with Project Firefly](https://adobeio-codelabs-barcode-adobedocs.project-helix.page) to learn more about building a headless app for barcode generation.*
+*Note: Visit the codelab [Headless Apps with Project Firefly](https://adobeio-codelabs-barcode-adobedocs.project-helix.page) to learn more about building a headless app for barcode generation.*  
 
 Now that you have it set up in Firefly app, next step is to create a marketing workflow in Campaign Standard which takes care of receiving external signals from the app and sending promotion emails. To do that, go to *Marketing Activities > Create > Workflow*. Define the properties of your workflow, and finish the creation.  
 
@@ -179,7 +179,7 @@ async function main (params) {
 exports.main = main
 ```
 
-To update the UI, open `App.js` and add method `sendPromo()` as following. Also, don't forget to bind this method inside the constructor: `this.sendPromo = this.sendPromo.bind(this)`.
+To update the UI, open `Home.js` and add method `sendPromo()` as following.
 
 ```javascript
 async sendPromo (email) {
@@ -193,7 +193,7 @@ async sendPromo (email) {
     if (this.props.ims.org && !headers['x-gw-ims-org-id']) {
       headers['x-gw-ims-org-id'] = this.props.ims.org
     }
-    const actionResponse = await actionWebInvoke('send-promo', headers, { email })
+    const actionResponse = await actionWebInvoke(actions['send-promo'], headers, { email })
     console.log(`Response from send-promo:`, actionResponse)
   } catch (e) {
     // log and store any error message
@@ -202,37 +202,57 @@ async sendPromo (email) {
 }
 ```
 
-Finally let's update the renderred profiles grid to include the send promo button. As we're using new React Spectrum components for the confirm dialog, make sure that they are specified as dependencies in the `package.json` file and imported properly in `App.js`.
+Finally let's update the renderred profiles grid view to include the send promo button. As we're using new React Spectrum components for the confirm dialog, make sure that they are imported properly in `Home.js`.
 
 ```javascript
-// importing confirm dialog components
-import { ActionButton } from '@react-spectrum/button'
-import { AlertDialog, DialogTrigger } from '@react-spectrum/dialog'
+// importing confirm dialog components, along with previously available components
+import { ActionButton, AlertDialog, DialogTrigger, Flex, Grid, ProgressCircle, Heading, Text, View } from '@adobe/react-spectrum'
 ```
 
 ```javascript
 // in render(), update the Grid component
-<Grid>
-  {profiles.map((profile, i) => {
-    return <Flex UNSAFE_className='profile'>
-      <DialogTrigger>
-        <ActionButton
-          UNSAFE_className='actions-invoke-button'>
-          Send promo code
-        </ActionButton>
-        <AlertDialog
-          variant='confirmation'
-          title='Send promo code'
-          primaryActionLabel='Confirm'
-          cancelLabel='Cancel'
-          onPrimaryAction={ () => this.sendPromo(profile['email']) }>
-          Do you want to send promo to { profile['email'] }?
-        </AlertDialog>
-      </DialogTrigger>
-      Name: { profile['firstName'] } { profile['lastName'] } - Email: { profile['email'] } - Date of birth: { profile['birthDate'] }
-    </Flex>
-  })}
-</Grid>
+render () {
+  const profiles = this.state.profiles
+  console.log(`profiles object:`, profiles)
+  return (
+    <View>
+      <Heading level={1}>Customer Profiles</Heading>
+      <Flex UNSAFE_className='profiles'>
+          <ProgressCircle
+            UNSAFE_className='actions-invoke-progress'
+            aria-label='loading'
+            isIndeterminate
+            isHidden={ !this.state.actionInvokeInProgress }/>
+          { !!profiles &&
+            <Grid>
+              {profiles.map((profile, i) => {
+                return <Flex UNSAFE_className='profile' key={ profile['PKey'] }>
+                  <DialogTrigger>
+                    <ActionButton
+                      UNSAFE_className='actions-invoke-button'>
+                      Send promo code
+                    </ActionButton>
+                    <AlertDialog
+                      variant='confirmation'
+                      title='Send promo code'
+                      primaryActionLabel='Confirm'
+                      cancelLabel='Cancel'
+                      onPrimaryAction={ () => this.sendPromo(profile['email']) }>
+                      Do you want to send promo to { profile['email'] }?
+                    </AlertDialog>
+                  </DialogTrigger>
+                  Name: { profile['firstName'] } { profile['lastName'] } - Email: { profile['email'] } - Date of birth: { profile['birthDate'] }
+                </Flex>
+              })}
+            </Grid>
+          }
+          { !profiles &&
+            <Text>No profiles!</Text>
+          }
+        </Flex>
+    </View>
+  )
+}
 ```
 
 After that, execute `aio app run` again so that your app is running locally.

@@ -91,60 +91,21 @@ An access token is retrieved to initiate the SDK client instance, which is then 
 
 Next, let's see how the web UI communicates with the backend. All web assets are placed in the `web-src` folder.  
 Beside a few auto-generated files that are useful for running your app on Adobe Experience Cloud (ExC) Shell, `App.js` is the extension point of your UI.  
-By default, it contains a form that lists all available backend actions, allows you to select the action to be invoke, and once you click on the "invoke" button, it shows the invocation results in the browser console.
+By default, it contains 3 pages: Home and About are just static pages showing listing reference docs, and ActionsForm lists all available backend actions, allows you to select the action to be invoke, and once you click on the "invoke" button, it shows the invocation results in the browser console.
 
 ```javascript
-<Flex UNSAFE_className='main-actions'>
-  <h3 className='actions-title'>Run your application backend actions</h3>
-  { Object.keys(actions).length > 0 &&
-    <Form UNSAFE_className='actions-form' necessityIndicator='label'>
-    <Picker
-      placeholder='select an action'
-      aria-label='select an action'
-      items={ Object.keys(actions).map(k => ({ name: k })) }
-      itemKey='name'
-      onSelectionChange={ name => this.setState({ actionSelected: name, actionResponseError: null, actionResponse: null }) }>
-      { item => <Item>{ item.name }</Item> }
-    </Picker>
-    <TextField
-      label='headers'
-      placeholder='{ "key": "value" }'
-      validationState={ this.state.actionHeadersValid }
-      onChange={ input => this.setJSONInput(input, 'actionHeaders', 'actionHeadersValid' ) }/>
-    <TextField
-      label='params'
-      placeholder='{ "key": "value" }'
-      validationState={ this.state.actionParamsValid }
-      onChange={ input => this.setJSONInput(input, 'actionParams', 'actionParamsValid' ) }/>
-    <Flex UNSAFE_className='actions-invoke'>
-      <Button
-        UNSAFE_className='actions-invoke-button'
-        variant='primary'
-        onPress={ this.invokeAction.bind(this) }
-        isDisabled={ !this.state.actionSelected }>
-        Invoke
-      </Button>
-      <ProgressCircle
-        UNSAFE_className='actions-invoke-progress'
-        aria-label='loading'
-        isIndeterminate
-        isHidden={ !this.state.actionInvokeInProgress }/>
-      </Flex>
-    </Form>
-  }
-  { Object.keys(actions).length === 0 &&
-    <Text>You have no actions !</Text>
-  }
-  { this.state.actionResponseError &&
-    <Text UNSAFE_className='actions-invoke-error'>
-      Failure! See the error in your browser console.
-    </Text>
-  }
-  { !this.state.actionError && this.state.actionResponse &&
-    <Text UNSAFE_className='actions-invoke-success'>
-      Success! See the response content in your browser console.
-    </Text>
-  }
-</Flex>
+<View gridArea='content' padding='size-200'>
+  <Switch>
+    <Route exact path='/'>
+      <Home></Home>
+    </Route>
+    <Route path='/actions'>
+      <ActionsForm runtime={props.runtime} ims={props.ims} />
+    </Route>
+    <Route path='/about'>
+      <About></About>
+    </Route>
+  </Switch>
+</View>
 ```
 [Next](lesson3.md)

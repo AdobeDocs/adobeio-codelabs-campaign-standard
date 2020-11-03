@@ -18,7 +18,7 @@ Please note that, as you are visiting the localhost site via HTTPS, the browser 
 
 ![accept-cert](assets/accept-cert.png)
 
-You should be able to see the UI of the app. It contains a form that allows you to try invoking the existing actions in the app, as well as some useful docs for developing Firefly apps.
+You should be able to see the UI of the app. Navigating to `Your App Actions`, there is a form that allows you to try invoking the existing actions in the app.
 
 ![localhost-ui](assets/localhost-ui.png)
 

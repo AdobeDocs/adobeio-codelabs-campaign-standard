@@ -10,7 +10,7 @@ Then `manifest.yml` is the cockpit of your Firefly app backend. It lists the dec
 get-profiles:
   function: actions/get-profiles/index.js
   web: 'yes'
-  runtime: 'nodejs:12'
+  runtime: 'nodejs:14'
   inputs:
     LOG_LEVEL: debug
     tenant: $CAMPAIGN_STANDARD_TENANT

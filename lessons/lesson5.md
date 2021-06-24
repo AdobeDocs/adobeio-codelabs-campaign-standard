@@ -102,7 +102,7 @@ In order to trigger the workflow, you need to provide a workflow ID to the trigg
 send-promo:
   function: actions/send-promo/index.js
   web: 'yes'
-  runtime: 'nodejs:10'
+  runtime: 'nodejs:14'
   inputs:
     LOG_LEVEL: debug
     tenant: $CAMPAIGN_STANDARD_TENANT
